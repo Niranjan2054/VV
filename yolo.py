@@ -18,14 +18,14 @@ from keras.models import load_model
 from yolo4.model import yolo_eval, Mish
 from yolo4.utils import letterbox_image
 import os
-from keras.utils import multi_gpu_model
+# from tensorflow.keras.utils import multi_gpu_model
 
 required_classes_from_yolo =['car','truck','bus','person','bicycle','motorbike']
 class YOLO(object):
     def __init__(self):
-        self.model_path = 'model_data/yolo4.h5'
-        self.anchors_path = 'model_data/yolo_anchors.txt'
-        self.classes_path = 'model_data/coco_classes.txt'
+        self.model_path = '/content/VV/model_data/yolo4.h5'
+        self.anchors_path = '/content/VV/model_data/yolo_anchors.txt'
+        self.classes_path = '/content/VV/model_data/coco_classes.txt'
         self.gpu_num = 1
         self.score = 0.5
         self.iou = 0.5
@@ -73,7 +73,8 @@ class YOLO(object):
         # Generate output tensor targets for filtered bounding boxes.
         self.input_image_shape = K.placeholder(shape=(2, ))
         if self.gpu_num>=2:
-            self.yolo_model = multi_gpu_model(self.yolo_model, gpus=self.gpu_num)
+            pass
+            # self.yolo_model = multi_gpu_model(self.yolo_model, gpus=self.gpu_num)
         boxes, scores, classes = yolo_eval(self.yolo_model.output, self.anchors,
                 len(self.class_names), self.input_image_shape,
                 score_threshold=self.score, iou_threshold=self.iou)
