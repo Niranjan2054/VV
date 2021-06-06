@@ -1,0 +1,11 @@
+*.mp4
+video.webm
+output_yolov4.avi
+__pycache__/
+video/
+*.ipynb
+mot-ground-truth/
+mot_evaluation/
+sample_video/
+model_data/yolo4.h5
+model_data/yolov4.weights
